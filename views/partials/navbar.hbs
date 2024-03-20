@@ -1,34 +1,30 @@
-
 <header class="p-3 text-bg-dark">
     <div class="container">
       <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        
-
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+          <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
+          {{#if user}}
+            {{#unless user.admin}}
+              <li><a href="/myOrder" class="nav-link px-2 text-white">Мои заказы</a></li>
+              <li><a href="/order-user" class="nav-link px-2 text-white">Заказать</a></li>
+            {{/unless}}
+            {{#if user.admin}}
+              <li><a href="/adminOrders" class="nav-link px-2 text-white">order</a></li>
+            {{/if}}
+          {{/if}}  
         </ul>
-
-        
-              <div class="text-end">
-                {{#if user}}
-                  <span class="btn btn-outline-light me-2">{{user.username}}</span>
-                  {{#if user.admin}}
-                    <a href="/admin" class="btn btn-outline-light me-2">Админ панель</a>
-                  {{/if}}
-                  <a href="/logout" class="btn btn-outline-light me-2">Выйти</a>
-                {{else}}
-                  <a href="/log" class="btn btn-outline-light me-2">Войти</a>
-                  <a href="/reg" class="btn btn-outline-light me-2">Регистрация</a>
-                {{/if}}
-              </div>
-
-
-
-
+        <div class="text-end">
+          {{#if user}}
+            <span class="btn btn-outline-light me-2">{{user.username}}</span>
+            {{#if user.admin}}
+              <a href="/index-admin" class="btn btn-outline-light me-2">Админ панель</a>
+            {{/if}}
+            <a href="/logout" class="btn btn-outline-light me-2">Выйти</a>
+          {{else}}
+            <a href="/log" class="btn btn-outline-light me-2">Войти</a>
+            <a href="/reg" class="btn btn-outline-light me-2">Регистрация</a>
+          {{/if}}
+        </div>
       </div>
     </div>
   </header>

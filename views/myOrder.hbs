@@ -1,0 +1,55 @@
+
+<div style="max-width: 600px; margin: auto; border: 1px solid #ccc; padding: 20px; margin-top: 50px; border-radius: 10px; font-family: Arial;">
+  <h2 style="text-align: center;">Мои заказы</h2>
+  <ul id="orderList" style="list-style-type: none;">
+    {{#each orders}}
+      <li style="margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 10px;">
+        <p class="lead" style="border-bottom: 1px solid #ccc; padding: 10px;"><strong>Номер заказа:</strong> {{this.OrderID}}</p>
+        <p class="lead" style="border-bottom: 1px solid #ccc; padding: 10px;"><strong>Товар:</strong> {{this.ProductName}}</p>
+        <p class="lead" style="border-bottom: 1px solid #ccc; padding: 10px;"><strong>Количество:</strong> {{this.Quantity}}</p>
+        <p class="lead" style="border-bottom: 1px solid #ccc; padding: 10px;"><strong>URL:</strong> <a href="{{this.URL}}">{{this.URL}}</a></p>
+        <p class="lead" style="border-bottom: 1px solid #ccc; padding: 10px;"><strong>Сроки:</strong> с {{dateFormat this.StartDate 'DD MM'}} по {{dateFormat this.EndDate 'DD MM'}}</p>
+        <p class="lead" style="border-bottom: 1px solid #ccc; padding: 10px;"><strong>Автор:</strong> {{this.Author}}</p>
+        <p class="lead" style="border-bottom: 1px solid #ccc; padding: 10px;"><strong>Статус:</strong> {{this.Status}}</p>
+      </li>
+    {{/each}}
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+{{!-- <div style="max-width: 600px; margin: auto; border: 1px solid #ccc; padding: 20px; margin-top: 50px; border-radius: 10px;">
+  <h2 style="text-align: center;">Мои заказы</h2>
+  <ul id="orderList" style="list-style-type: none;">
+    {{#each orders}}
+      <li style="margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 10px;">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Номер заказа: {{this.OrderID}}" aria-label="OrderID" aria-describedby="basic-addon1" readonly>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Товар: {{this.ProductName}}" aria-label="ProductName" aria-describedby="basic-addon1" readonly>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Количество: {{this.Quantity}}" aria-label="Quantity" aria-describedby="basic-addon1" readonly>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="URL: {{this.URL}}" aria-label="URL" aria-describedby="basic-addon1" readonly>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Сроки: с {{dateFormat this.StartDate 'DD MM'}} по {{dateFormat this.EndDate 'DD MM'}}" aria-label="Dates" aria-describedby="basic-addon1" readonly>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Автор: {{this.Author}}" aria-label="Author" aria-describedby="basic-addon1" readonly>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Статус: {{this.Status}}" aria-label="Status" aria-describedby="basic-addon1" readonly>
+        </div>
+      </li>
+    {{/each}}
+  </ul>
+</div> --}}

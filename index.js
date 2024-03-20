@@ -4,6 +4,7 @@ import exphbs  from 'express-handlebars'
 import Routes from './app/routes/routes.js'
 import Data, { checkConnection } from './app/database/db.js'
 
+
 const PORT = process.env.PORT || 3000
 
 const app = express()

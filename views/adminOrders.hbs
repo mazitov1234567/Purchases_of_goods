@@ -1,0 +1,40 @@
+
+<div style="max-width: 600px; margin: auto; border: 1px solid #ccc; padding: 20px; margin-top: 50px; border-radius: 10px;">
+  <h2 style="text-align: center;">Все заказы</h2>
+  <ul id="orderList" style="list-style-type: none;">
+    {{#each orders}}
+      <li style="margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 10px;">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Номер заказа: {{this.OrderID}}" aria-label="OrderID" aria-describedby="basic-addon1" readonly>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Товар: {{this.ProductName}}" aria-label="ProductName" aria-describedby="basic-addon1" readonly>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Количество: {{this.Quantity}}" aria-label="Quantity" aria-describedby="basic-addon1" readonly>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="URL: {{this.URL}}" aria-label="URL" aria-describedby="basic-addon1" readonly>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Сроки: с {{dateFormat this.StartDate 'DD MM'}} по {{dateFormat this.EndDate 'DD MM'}}" aria-label="Dates" aria-describedby="basic-addon1" readonly>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Автор: {{this.Author}}" aria-label="Author" aria-describedby="basic-addon1" readonly>
+        </div>
+         <form action="/updateOrderStatus" method="POST">
+          <input type="hidden" name="OrderID" value="{{this.OrderID}}">
+          <div class="input-group mb-3">
+            <select name="newStatus" class="form-control" aria-label="Status" aria-describedby="basic-addon1">
+              <option value="Новый" {{#if (eq this.Status 'Новый')}}selected{{/if}}>Новый</option>
+              <option value="В обработке" {{#if (eq this.Status 'В обработке')}}selected{{/if}}>В обработке</option>
+              <option value="Выполнен" {{#if (eq this.Status 'Выполнен')}}selected{{/if}}>Выполнен</option>
+            </select>
+            <button type="submit">Обновить статус</button>
+          </div>
+        </form>
+      </li>
+    {{/each}}
+  </ul>
+</div>
+

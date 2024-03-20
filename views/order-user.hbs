@@ -1,0 +1,31 @@
+<div class="container" style="max-width: 600px; margin: auto; border: 1px solid #ccc; padding: 20px; margin-top: 50px;">
+  <form action="/submit-order" method="post">
+    <div class="input-group mb-3">
+      <input type="text" name="productName" class="form-control" placeholder="Название товара" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <div class="form-outline">
+      <input type="number" name="quantity" id="typeNumber" placeholder="Количество" class="form-control" />
+      <label class="form-label" for="typeNumber"></label>
+    </div>
+    <div class="form-outline" data-mdb-input-init>
+      <input type="url" name="url" id="typeURL" placeholder="URL input" class="form-control" />
+      <label class="form-label" for="typeURL"></label>
+    </div>
+    <div style="border: 1px solid #ccc; padding: 10px; background-color: #f8f9fa;">
+      <div class="input-group mb-3">
+        <span class="text">Дата начала</span>
+        <input type="date" name="startDate" class="form-control" aria-label="Дата начала">
+      </div>
+      <div class="input-group mb-3">
+        <span class="text">Дата окончания</span>
+        <input type="date" name="endDate" class="form-control" aria-label="Дата окончания">
+      </div>
+    </div>
+    <div class="input-group mb-3">
+      <input type="text" name="author" class="form-control" placeholder="Автор" aria-label="Username" aria-describedby="basic-addon1">
+    </div>
+    <div style="text-align: center;">
+      <button class="btn btn-primary" type="submit" style="background-color: rgb(0, 0, 0); color: white;">Сделать заказ</button>
+    </div>
+  </form>
+</div>
