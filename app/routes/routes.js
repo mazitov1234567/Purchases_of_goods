@@ -62,6 +62,19 @@ app.post('/log', async (req, res) => {
   }
 });
 
+app.post('/register', async (req, res) => {
+  const { email, username, password } = req.body;
+
+  const [rows] = await pool.execute('SELECT * FROM users WHERE email = ?', [email]);
+  if (rows.length > 0) {
+    res.send('Пользователь с таким email уже существует');
+  } else {
+    await pool.execute('INSERT INTO users (username, email, password, admin) VALUES (?, ?, ?, ?)', [username, email, password, 0]);
+    res.redirect('/log');
+  }
+});
+
+
   app.get('/index-admin', (req, res) => {
     if (req.session.user && req.session.user.admin) {
       res.render('index-admin', {
@@ -95,6 +108,59 @@ app.post('/log', async (req, res) => {
       res.redirect('/log');
     }
 });
+
+app.post('/orders/new', async (req, res) => {
+  if(req.session.user && req.session.user.admin) {
+    const [rows, fields] = await pool.execute(
+      'SELECT * FROM Orders WHERE Status = ?',
+      ['На рассмотрении']
+    );
+    // Отправьте заказы обратно на клиент или рендерите страницу с заказами
+    res.render('adminOrders', { orders: rows });
+  } else {
+    res.status(403).send('Доступ запрещен');
+  }
+});
+
+app.post('/orders/processing', async (req, res) => {
+  if(req.session.user && req.session.user.admin) {
+    const [rows, fields] = await pool.execute(
+      'SELECT * FROM Orders WHERE Status = ?',
+      ['Закупаем']
+    );
+    // Отправьте заказы обратно на клиент или рендерите страницу с заказами
+    res.render('adminOrders', { orders: rows });
+  } else {
+    res.status(403).send('Доступ запрещен');
+  }
+});
+
+app.post('/orders/completed', async (req, res) => {
+  if(req.session.user && req.session.user.admin) {
+    const [rows, fields] = await pool.execute(
+      'SELECT * FROM Orders WHERE Status = ?',
+      ['Ждем']
+    );
+    // Отправьте заказы обратно на клиент или рендерите страницу с заказами
+    res.render('adminOrders', { orders: rows });
+  } else {
+    res.status(403).send('Доступ запрещен');
+  }
+});
+
+app.post('/orders/canceled', async (req, res) => {
+  if(req.session.user && req.session.user.admin) {
+    const [rows, fields] = await pool.execute(
+      'SELECT * FROM Orders WHERE Status = ?',
+      ['Забрать']
+    );
+    // Отправьте заказы обратно на клиент или рендерите страницу с заказами
+    res.render('adminOrders', { orders: rows });
+  } else {
+    res.status(403).send('Доступ запрещен');
+  }
+});
+
 
 app.post('/updateOrderStatus', async (req, res) => {
   if(req.session.user && req.session.user.admin) {
@@ -173,7 +239,7 @@ app.post('/submit-order', async (req, res) => {
 
   if (userId) {
     await pool.execute(
-      'INSERT INTO Orders (ProductName, Quantity, URL, StartDate, EndDate, Author, Status, UserID) VALUES (?, ?, ?, ?, ?, ?, "Новый", ?)',
+      'INSERT INTO Orders (ProductName, Quantity, URL, StartDate, EndDate, Author, Status, UserID) VALUES (?, ?, ?, ?, ?, ?, "На рассмотрении", ?)',
       [order.productName, order.quantity, order.url, order.startDate, order.endDate, order.author, userId]
     );
 

@@ -1,6 +1,22 @@
 
 <div style="max-width: 600px; margin: auto; border: 1px solid #ccc; padding: 20px; margin-top: 50px; border-radius: 10px;">
   <h2 style="text-align: center;">Все заказы</h2>
+
+   <style>
+.btn {
+    margin: 10px;
+}
+</style>
+
+<div class="btn-group" role="group" aria-label="Basic outlined example">
+    <form action="/orders/new" method="POST"><button class="btn btn-outline-primary" type="submit">На рассмотрении</button></form>
+    <form action="/orders/processing" method="POST"><button class="btn btn-outline-primary" type="submit">Закупаем</button></form>
+    <form action="/orders/completed" method="POST"><button class="btn btn-outline-primary" type="submit">Ждем</button></form>
+    <form action="/orders/canceled" method="POST"><button class="btn btn-outline-primary" type="submit">Забрать</button></form>
+</div>
+
+
+  
   <ul id="orderList" style="list-style-type: none;">
     {{#each orders}}
       <li style="margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 10px;">
@@ -26,9 +42,10 @@
           <input type="hidden" name="OrderID" value="{{this.OrderID}}">
           <div class="input-group mb-3">
             <select name="newStatus" class="form-control" aria-label="Status" aria-describedby="basic-addon1">
-              <option value="Новый" {{#if (eq this.Status 'Новый')}}selected{{/if}}>Новый</option>
-              <option value="В обработке" {{#if (eq this.Status 'В обработке')}}selected{{/if}}>В обработке</option>
-              <option value="Выполнен" {{#if (eq this.Status 'Выполнен')}}selected{{/if}}>Выполнен</option>
+              <option value="На рассмотрении" {{#if (eq this.Status 'На рассмотрении')}}selected{{/if}}>На рассмотрении</option>
+              <option value="Закупаем" {{#if (eq this.Status 'Закупаем')}}selected{{/if}}>Закупаем</option>
+              <option value="Ждем" {{#if (eq this.Status 'Ждем')}}selected{{/if}}>Ждем</option>
+              <option value="Забрать" {{#if (eq this.Status 'Забрать')}}selected{{/if}}>Забрать</option>
             </select>
             <button type="submit">Обновить статус</button>
           </div>
