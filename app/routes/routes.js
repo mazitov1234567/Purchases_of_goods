@@ -116,7 +116,7 @@ app.post('/orders/new', async (req, res) => {
       ['На рассмотрении']
     );
     // Отправьте заказы обратно на клиент или рендерите страницу с заказами
-    res.render('adminOrders', { orders: rows });
+    res.render('adminOrders', { user: req.session.user, orders: rows });
   } else {
     res.status(403).send('Доступ запрещен');
   }
@@ -129,7 +129,7 @@ app.post('/orders/processing', async (req, res) => {
       ['Закупаем']
     );
     // Отправьте заказы обратно на клиент или рендерите страницу с заказами
-    res.render('adminOrders', { orders: rows });
+    res.render('adminOrders', { user: req.session.user, orders: rows });
   } else {
     res.status(403).send('Доступ запрещен');
   }
@@ -142,7 +142,7 @@ app.post('/orders/completed', async (req, res) => {
       ['Ждем']
     );
     // Отправьте заказы обратно на клиент или рендерите страницу с заказами
-    res.render('adminOrders', { orders: rows });
+    res.render('adminOrders', {user: req.session.user, orders: rows });
   } else {
     res.status(403).send('Доступ запрещен');
   }
@@ -155,7 +155,7 @@ app.post('/orders/canceled', async (req, res) => {
       ['Забрать']
     );
     // Отправьте заказы обратно на клиент или рендерите страницу с заказами
-    res.render('adminOrders', { orders: rows });
+    res.render('adminOrders', {user: req.session.user, orders: rows });
   } else {
     res.status(403).send('Доступ запрещен');
   }
@@ -243,7 +243,7 @@ app.post('/submit-order', async (req, res) => {
       [order.productName, order.quantity, order.url, order.startDate, order.endDate, order.author, userId]
     );
 
-    res.send('Заказ успешно отправлен!');
+    res.redirect('/myOrder');;
   } else {
     res.status(400).send('Ошибка: userId не определен');
   }
@@ -261,5 +261,15 @@ app.post('/submit-order', async (req, res) => {
     });
   });
 
+  app.get('/start', (req, res) => {
+    if(req.session.user && req.session.user) {
+      res.render('order-user', {
+        title: 'Order',
+        user: req.session.user,
+      });
+    } else {
+      res.redirect('/log'); // перенаправление на страницу авторизации
+    }
+  });
   
 export default app;
