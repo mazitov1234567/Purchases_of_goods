@@ -1,0 +1,44 @@
+
+
+<div style="max-width: 100%; margin: auto; border: 1px solid #ccc; padding: 20px; margin-top: 50px; border-radius: 10px; font-family: Arial;">  
+  <h2 style="text-align: center;">Все заказы</h2>
+  
+   <style>
+.btn {
+    margin: 10px;
+}
+</style>
+
+
+  
+  <ul id="orderList" style="list-style-type: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1em;">
+    {{#each orders}}
+      <li style="margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 10px;">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Номер заказа: {{this.OrderID}}" aria-label="OrderID" aria-describedby="basic-addon1" readonly>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Товар: {{this.ProductName}}" aria-label="ProductName" aria-describedby="basic-addon1" readonly>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Количество: {{this.Quantity}}" aria-label="Quantity" aria-describedby="basic-addon1" readonly>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="URL: {{this.URL}}" aria-label="URL" aria-describedby="basic-addon1" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; display: block; width: 300px;">
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Желаемые сроки: {{dateFormat this.StartDate 'DD MM'}}" aria-label="Dates" aria-describedby="basic-addon1" readonly>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Дата совершения заказа: {{OrderDateAndEndDate this.OrderDate 'DD MM YY' }}" aria-label="Dates" aria-describedby="basic-addon1" readonly>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Дата завершения заказа: {{OrderDateAndEndDate this.EndDate 'DD MM YY' }}" aria-label="Dates" aria-describedby="basic-addon1" readonly>
+        </div>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Автор: {{this.Author}}" aria-label="Author" aria-describedby="basic-addon1" readonly>
+        </div>
+      </li>
+    {{/each}}
+  </ul>
+</div>

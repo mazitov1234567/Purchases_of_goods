@@ -7,9 +7,11 @@
             {{#unless user.admin}}
               <li><a href="/myOrder" class="nav-link px-2 text-white">Мои заказы</a></li>
               <li><a href="/order-user" class="nav-link px-2 text-white">Заказать</a></li>
+              <li><a href="/order-history" class="nav-link px-2 text-white">История заказов</a></li>
             {{/unless}}
             {{#if user.admin}}
-              <li><a href="/adminOrders" class="nav-link px-2 text-white">Заказы</a></li>
+              <li><a href="/adminOrders" class="nav-link px-2 text-white">Активные заказы</a></li>
+              <li><a href="/adminOrdersCompleted" class="nav-link px-2 text-white">Завершенные заказы</a></li>
             {{/if}}
           {{/if}}  
         </ul>

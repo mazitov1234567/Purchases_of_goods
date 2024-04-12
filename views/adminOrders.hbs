@@ -1,14 +1,20 @@
 
-<div style="max-width: 600px; margin: auto; border: 1px solid #ccc; padding: 20px; margin-top: 50px; border-radius: 10px;">
-  <h2 style="text-align: center;">Все заказы</h2>
 
+<div style="max-width: 100%; margin: auto; border: 1px solid #ccc; padding: 20px; margin-top: 50px; border-radius: 10px; font-family: Arial;">  
+  <h2 style="text-align: center;">Все заказы</h2>
+  
    <style>
 .btn {
     margin: 10px;
 }
+.btn-group {
+    display: flex;
+    justify-content: center;
+}
+
 </style>
 
-<div class="btn-group" role="group" aria-label="Basic outlined example">
+<div class="btn-group" role="group" aria-label="Basic outlined example" style="display: flex; justify-content: center;">
     <form action="/orders/new" method="POST"><button class="btn btn-outline-primary" type="submit">На рассмотрении</button></form>
     <form action="/orders/processing" method="POST"><button class="btn btn-outline-primary" type="submit">Закупаем</button></form>
     <form action="/orders/completed" method="POST"><button class="btn btn-outline-primary" type="submit">Ждем</button></form>
@@ -16,11 +22,11 @@
 </div>
 
 
+
   
-  <ul id="orderList" style="list-style-type: none;">
+  <ul id="orderList" style="list-style-type: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1em;">
     {{#each orders}}
-      <li style="margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 10px;">
-        <div class="input-group mb-3">
+            <li style="margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 10px; {{#if (isOverThreeDays this.Status this.StatusChangeDate)}}background-color: #ffcccc;{{/if}}">        <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Номер заказа: {{this.OrderID}}" aria-label="OrderID" aria-describedby="basic-addon1" readonly>
         </div>
         <div class="input-group mb-3">
@@ -30,28 +36,37 @@
           <input type="text" class="form-control" placeholder="Количество: {{this.Quantity}}" aria-label="Quantity" aria-describedby="basic-addon1" readonly>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="URL: {{this.URL}}" aria-label="URL" aria-describedby="basic-addon1" readonly>
+        
+        <a href="{{this.URL}}"  style=" cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; ">
+        <input type="text" class="form-control" value="URL: {{this.URL}}" aria-label="URL" aria-describedby="basic-addon1" readonly style="cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 385px;">          </a>
+        </div>
+
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="Желаемые сроки: {{dateFormat this.StartDate 'DD MM'}}" aria-label="Dates" aria-describedby="basic-addon1" readonly>
         </div>
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Сроки: с {{dateFormat this.StartDate 'DD MM'}} по {{dateFormat this.EndDate 'DD MM'}}" aria-label="Dates" aria-describedby="basic-addon1" readonly>
+          <input type="text" class="form-control" placeholder="Дата совершения заказа: {{OrderDateAndEndDate this.OrderDate 'DD MM YY'}}" aria-label="Dates" aria-describedby="basic-addon1" readonly>
         </div>
         <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Автор: {{this.Author}}" aria-label="Author" aria-describedby="basic-addon1" readonly>
         </div>
-         <form action="/updateOrderStatus" method="POST">
-          <input type="hidden" name="OrderID" value="{{this.OrderID}}">
-          <div class="input-group mb-3">
-            <select name="newStatus" class="form-control" aria-label="Status" aria-describedby="basic-addon1">
-              <option value="На рассмотрении" {{#if (eq this.Status 'На рассмотрении')}}selected{{/if}}>На рассмотрении</option>
-              <option value="Закупаем" {{#if (eq this.Status 'Закупаем')}}selected{{/if}}>Закупаем</option>
-              <option value="Ждем" {{#if (eq this.Status 'Ждем')}}selected{{/if}}>Ждем</option>
-              <option value="Забрать" {{#if (eq this.Status 'Забрать')}}selected{{/if}}>Забрать</option>
-            </select>
-            <button type="submit">Обновить статус</button>
-          </div>
-        </form>
+
+        
+        {{#unless (eq this.Status 'Завершено')}}
+          <form action="/updateOrderStatus" method="POST">
+            <input type="hidden" name="OrderID" value="{{this.OrderID}}">
+            <div class="input-group mb-3">
+              <select name="newStatus" class="form-control" aria-label="Status" aria-describedby="basic-addon1">
+                <option value="На рассмотрении" {{#if (eq this.Status 'На рассмотрении')}}selected{{/if}}>На рассмотрении</option>
+                <option value="Закупаем" {{#if (eq this.Status 'Закупаем')}}selected{{/if}}>Закупаем</option>
+                <option value="Ждем" {{#if (eq this.Status 'Ждем')}}selected{{/if}}>Ждем</option>
+                <option value="Забрать" {{#if (eq this.Status 'Забрать')}}selected{{/if}}>Забрать</option>
+              </select>
+              <button type="submit">Обновить статус</button>
+            </div>
+          </form>
+        {{/unless}}
       </li>
     {{/each}}
   </ul>
 </div>
-
