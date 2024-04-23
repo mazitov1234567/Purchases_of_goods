@@ -5,7 +5,25 @@
     {{{ body }}}
   </div>  
   
-  <script type="module" src="/mains.js"></script>  
+ 
+<script>
+// Показать слой и сообщение
+document.addEventListener('DOMContentLoaded', function () {
+  const overlay = document.getElementById('overlay');
+  const successMessage = document.getElementById('successMessage');
+
+  overlay.style.display = 'block';
+  successMessage.style.display = 'block';
+
+  // Скрыть слой через 5 секунд (5000 миллисекунд)
+  setTimeout(function () {
+      successMessage.style.display = 'none';
+      overlay.style.display = 'none';
+  }, 1000);
+});
+
+</script>
+
 </body>
 </html>
 

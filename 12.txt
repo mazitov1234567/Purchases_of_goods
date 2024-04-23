@@ -3,7 +3,7 @@ import session from 'express-session'
 import pool from '../database/db.js'
 import moment from 'moment';
 import Handlebars from 'handlebars';
-import {get_order_history, get_email, insert_user, get_incomplete_orders, get_completed_orders, get_orders_by_status, update_order_status, update_order_status_with_date, get_user_orders,submit_order} from '../database/db.js'
+import {get_order_history, get_orderComplete_by_id, get_email, get_order_by_id, insert_user, get_incomplete_orders, get_completed_orders, get_orders_by_status, update_order_status, update_order_status_with_date, get_user_orders,submit_order,complete_order} from '../database/db.js'
 import {mlog} from '../logs.js'
 
 import fs from 'fs-extra'
@@ -131,6 +131,28 @@ app.post('/register', async (req, res) => {
       res.redirect('/log');
     }
   });
+
+  app.get('/searchOrder', async (req, res) => {
+    if(req.session.user.admin) {
+        const orderId = req.query.orderId;
+        const order = await get_order_by_id(orderId);
+  
+        res.render('adminOrders', { title: 'Search Order', user: req.session.user, order });
+    } else {
+        res.redirect('/log');
+    }
+});
+
+app.get('/searchOrderCompleted', async (req, res) => {
+    if(req.session.user.admin) {
+        const orderId = req.query.orderId;
+        const orderComplete = await get_orderComplete_by_id(orderId);
+  
+        res.render('adminOrdersCompleted', { title: 'Search Order', user: req.session.user, orderComplete });
+    } else {
+        res.redirect('/log');
+    }
+});
 
   app.get('/adminOrdersCompleted', async (req, res) => {
     if(req.session.user.admin) {
@@ -260,12 +282,22 @@ app.post('/updateOrderStatus', async (req, res) => {
   });
 
   app.get('/myOrder', async (req, res) => {
-    if(req.session.user) {
+    if (req.session.user) {
       const userId = req.session.user.id;
-    
+  
       const orders = await get_user_orders(pool, userId);
-    
-      res.render('myOrder', { title: 'orders', user: req.session.user, orders });
+  
+      // Проверьте флаг успешного заказа
+      const orderSuccess = req.session.orderSuccess;
+      if (orderSuccess) {
+        // Очистите флаг, чтобы сообщение не показывалось в следующий раз
+        req.session.orderSuccess = false;
+        // Отобразите сообщение о успешном заказе
+        res.render('myOrder', { title: 'orders', user: req.session.user, orders, successMessage: 'Заказ успешно совершен!' });
+      } else {
+        // Отобразите страницу без сообщения
+        res.render('myOrder', { title: 'orders', user: req.session.user, orders });
+      }
     } else {
       res.redirect('/log');
     }
@@ -309,8 +341,8 @@ app.post('/updateOrderStatus', async (req, res) => {
   
     if (userId) {
       await submit_order(pool, order, userId, author, orderDate);
+      req.session.orderSuccess = true; // Установите флаг успешного заказа
       res.redirect('/myOrder');
-      
     } else {
       res.status(400).send('Ошибка: userId не определен');
     }

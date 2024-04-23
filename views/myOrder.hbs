@@ -2,10 +2,18 @@
 
 <div style="max-width: 100%; margin: auto; border: 1px solid #ccc; padding: 20px; margin-top: 50px; border-radius: 10px; font-family: Arial;">
   <h2 style="text-align: center;">Мои заказы</h2>
+  {{#if successMessage}}
+<div class="overlay" id="overlay"></div>
+
+  <div class="success-message">{{successMessage}}</div>
+  <div class="success-message" id="successMessage">Заказ успешно совершен!</div>
+
+{{/if}}
+
   <div id="orderList" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1em;">
     {{#if orders.length}}
       {{#each orders}}
-        <div style="padding: 10px; border: 1px solid #ccc; border-radius: 10px;  {{#if (isOverThreeDays this.Status this.StatusChangeDate)}}background-color: #ffcccc;{{/if}}">
+        <div style="padding: 10px; border: 3px solid #1ab188; border-radius: 10px;  {{#if (isOverThreeDays this.Status this.StatusChangeDate)}}background-color: #ffcccc;{{/if}}">
           <p class="lead" style="border-bottom: 1px solid #ccc; padding: 10px;"><strong>Номер заказа:</strong> {{this.OrderID}}</p>
           <p class="lead" style="border-bottom: 1px solid #ccc; padding: 10px;"><strong>Товар:</strong> {{this.ProductName}}</p>
           <p class="lead" style="border-bottom: 1px solid #ccc; padding: 10px;"><strong>Количество:</strong> {{this.Quantity}}</p>
@@ -15,12 +23,12 @@
           <p class="lead" style="border-bottom: 1px solid #ccc; padding: 10px;"><strong>Автор:</strong> {{this.Author}}</p>
           <p class="lead" style="border-bottom: 1px solid #ccc; padding: 10px;"><strong>Статус:</strong> {{this.Status}}</p>
           {{#if (isOverThreeDays this.Status this.StatusChangeDate)}}
-            <p style="color: red;">Срок хранения вашего товара превысил 3 дня, пожалуйста заберите ваш товар</p>
+            <p style="color: rgb(53, 1, 1); font-size: 18px; font-weight: bold; text-align: center;">Срок хранения вашего товара превысил 3 дня, пожалуйста заберите ваш товар</p>
           {{/if}}
           {{#if this.CanComplete}}
             <form action="/completeOrder" method="POST">
               <input type="hidden" name="orderId" value="{{this.OrderID}}">
-              <button type="submit">Завершить заказ</button>
+              <button type="submit" style="display: block; margin: 0 auto; padding: 15px 30px; font-size: 18px; background-color: #1ab188; color: rgb(255, 255, 255); border:none; border-radius: 10px;">Завершить заказ</button>
             </form>
           {{/if}}
         </div>

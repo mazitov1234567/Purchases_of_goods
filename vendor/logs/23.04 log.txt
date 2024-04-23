@@ -1,0 +1,613 @@
+
+ 19:41:01 /index-admin 
+ cookie:[object Object] 1
+ 19:41:01 /log 
+ cookie:[object Object] 1
+ 19:41:01 /assets/indexs.css 
+ cookie:[object Object] 1
+ 19:41:01 /log 
+ cookie:[object Object] 1
+ 19:41:01 /favicon.ico 
+ cookie:[object Object] 1
+ 19:41:01 /log 
+ cookie:[object Object] 1
+ 19:41:01 /favicon.ico 
+ cookie:[object Object] 1
+ 19:41:01 /log 
+ cookie:[object Object] 1
+ 19:41:03 /log 
+ cookie:[object Object] 1
+ 19:41:03 / 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 19:41:03 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 19:41:05 /adminOrders 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 19:41:05 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 19:41:16 /searchOrder 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1 
+ orderId:20
+ 19:41:16 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 19:41:18 /logout undefined 1
+ 19:41:18 /log 
+ cookie:[object Object] 1
+ 19:41:18 /assets/indexs.css 
+ cookie:[object Object] 1
+ 19:41:18 /log 
+ cookie:[object Object] 1
+ 19:41:23 /log 
+ cookie:[object Object] 1
+ 19:41:23 / 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 19:41:23 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 19:41:24 /myOrder 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 19:41:24 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 19:41:28 /order-user 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 19:41:28 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 19:41:29 /myOrder 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 19:41:29 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 19:41:30 /order-user 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 19:41:30 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 19:41:30 /order-history 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 19:41:30 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 19:41:33 /order-user 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 19:41:33 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 19:41:35 /myOrder 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 19:41:35 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 19:41:41 /order-user 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 19:41:41 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 19:41:48 /submit-order 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 19:41:48 /myOrder 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:true 1
+ 19:41:48 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:false 1
+ 19:49:09 /myOrder 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:false 1
+ 19:49:09 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:false 1
+ 19:49:10 /order-user 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:false 1
+ 19:49:10 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:false 1
+ 19:49:11 /order-history 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:false 1
+ 19:49:11 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:false 1
+ 19:49:12 /myOrder 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:false 1
+ 19:49:12 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:false 1
+ 20:23:18 /logout 
+ cookie:[object Object] 1
+ 20:23:18 /log 
+ cookie:[object Object] 1
+ 20:23:18 /assets/indexs.css 
+ cookie:[object Object] 1
+ 20:23:18 /log 
+ cookie:[object Object] 1
+ 20:23:22 /log 
+ cookie:[object Object] 1
+ 20:23:22 / 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:23:22 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:23:24 /logout undefined 1
+ 20:23:24 /log 
+ cookie:[object Object] 1
+ 20:23:24 /assets/indexs.css 
+ cookie:[object Object] 1
+ 20:23:24 /log 
+ cookie:[object Object] 1
+ 20:25:44 /log 
+ cookie:[object Object] 1
+ 20:25:44 / 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:25:44 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:25:47 /adminOrders 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:25:47 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:25:59 /searchOrder 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1 
+ orderId:20
+ 20:25:59 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:26:07 /logout undefined 1
+ 20:26:07 /log 
+ cookie:[object Object] 1
+ 20:26:07 /assets/indexs.css 
+ cookie:[object Object] 1
+ 20:26:07 /log 
+ cookie:[object Object] 1
+ 20:26:20 /log 
+ cookie:[object Object] 1
+ 20:26:20 / 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:26:20 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:26:21 /adminOrders 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:26:21 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:26:27 /updateOrderStatus 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:26:27 /adminOrders 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:26:27 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:26:30 /orders/new 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:26:30 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:26:33 /orders/processing 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:26:33 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:26:34 /orders/completed 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:26:34 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:26:35 /orders/canceled 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:26:35 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:26:39 /orders/new 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:26:39 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:26:49 /searchOrder 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1 
+ orderId:28
+ 20:26:49 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:26:54 /updateOrderStatus 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:26:54 /adminOrders 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:26:54 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:26:56 /orders/completed 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:26:56 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:26:58 /adminOrdersCompleted 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:26:58 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:27:12 /searchOrderCompleted 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1 
+ orderId:26
+ 20:27:12 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:27:17 /logout undefined 1
+ 20:27:17 /log 
+ cookie:[object Object] 1
+ 20:27:17 /assets/indexs.css 
+ cookie:[object Object] 1
+ 20:27:17 /log 
+ cookie:[object Object] 1
+ 20:27:25 /log 
+ cookie:[object Object] 1
+ 20:27:25 / 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 20:27:25 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 20:27:28 /order-user 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 20:27:28 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 20:27:38 /submit-order 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 20:27:38 /myOrder 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:true 1
+ 20:27:38 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:false 1
+ 20:27:52 /completeOrder 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:false 1
+ 20:27:52 /myOrder 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:false 1
+ 20:27:52 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:false 1
+ 20:27:55 /myOrder 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:false 1
+ 20:27:55 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:false 1
+ 20:27:57 /order-history 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:false 1
+ 20:27:57 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:false 1
+ 20:28:08 /order-user 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:false 1
+ 20:28:08 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:false 1
+ 20:28:16 /logout undefined 1
+ 20:28:16 /log 
+ cookie:[object Object] 1
+ 20:28:16 /assets/indexs.css 
+ cookie:[object Object] 1
+ 20:28:16 /log 
+ cookie:[object Object] 1
+ 20:28:28 /log 
+ cookie:[object Object] 1
+ 20:28:28 / 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:28:28 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:28:31 /adminOrders 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:28:31 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:28:41 /orders/new 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:28:41 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:28:42 /orders/processing 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:28:42 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:28:44 /orders/completed 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:28:44 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:28:45 /orders/canceled 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:28:45 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:28:48 /orders/new 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:28:48 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:28:59 /searchOrder 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1 
+ orderId:43
+ 20:28:59 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:29:02 /updateOrderStatus 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:29:02 /adminOrders 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:29:02 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:29:04 /orders/completed 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:29:04 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:29:07 /adminOrdersCompleted 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:29:07 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:29:19 /searchOrderCompleted 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1 
+ orderId:26
+ 20:29:19 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:84 
+ user:[object Object] 1
+ 20:29:26 /logout undefined 1
+ 20:29:26 /log 
+ cookie:[object Object] 1
+ 20:29:26 /assets/indexs.css 
+ cookie:[object Object] 1
+ 20:29:26 /log 
+ cookie:[object Object] 1
+ 20:29:30 /log 
+ cookie:[object Object] 1
+ 20:29:30 / 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 20:29:30 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 20:29:31 /order-user 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 20:29:31 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 20:29:38 /submit-order 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 1
+ 20:29:38 /myOrder 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:true 1
+ 20:29:38 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:false 1
+ 20:29:50 /completeOrder 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:false 1
+ 20:29:50 /myOrder 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:false 1
+ 20:29:50 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:false 1
+ 20:29:52 /order-history 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:false 1
+ 20:29:52 /assets/indexs.css 
+ cookie:[object Object] 
+ userId:85 
+ user:[object Object] 
+ orderSuccess:false 1

@@ -1,13 +1,18 @@
 import express from 'express'
 import path  from 'path'
 import exphbs  from 'express-handlebars'
-import Routes from './app/routes/routes.js'
-import Data, { checkConnection } from './app/database/db.js'
+import Data, { checkConnection } from './vendor/db.js'
 import cors from 'cors'
 import fs from 'fs-extra'
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-import {mlog} from './app/logs.js'
+import {mlog} from './vendor/logs.js'
+import session from 'express-session'
+import pool from './vendor/db.js'
+import moment from 'moment';
+import Handlebars from 'handlebars';
+import {get_order_history, get_orderComplete_by_id, get_email, get_order_by_id, insert_user, get_incomplete_orders, get_completed_orders, get_orders_by_status, update_order_status, update_order_status_with_date, get_user_orders,submit_order,complete_order} from './vendor/db.js'
+
+
+
 let test = true
 var appDir = path.dirname(import.meta.url);
 appDir = appDir.split('///')
@@ -31,18 +36,11 @@ app.use(cors())
 app.engine('hbs', hbs.engine)
 app.set('view engine', 'hbs')
 app.set('views', 'views')
-app.use(Routes)
 app.use(express.urlencoded({ extended: true }))
 
 
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = dirname(__filename);
-
-// app.use(express.static(path.join(__dirname, 'views/images')));
-// app.use('/views/assets', express.static(path.join(__dirname, 'assets')));
-// app.use(express.static(path.join(__dirname, 'views/public')));
-// app.use('/views/public', express.static(path.join(__dirname, 'public')));
 app.use(express.static('views/public'));
+app.use(express.static('views/assets'));
 
 if (test){
     app.use(express.static(path.join(appDir, 'views/images')));
@@ -53,12 +51,377 @@ if (test){
 }
 
 if (test){
-    app.use(express.static(path.join(appDir, 'views/mains')));
+    app.use(express.static(path.join(appDir, 'views/assets')));
     app.set('views','views');
 } else {
-    app.use(express.static(path.join('//',appDir, 'views/mains')));
+    app.use(express.static(path.join('//',appDir, 'views/assets')));
     app.set('views',path.join('//',appDir, 'views'));
 }
+
+if (test){
+    app.use(express.static(path.join(appDir, 'public')));
+    app.set('views','views');
+} else {
+    app.use(express.static(path.join('//',appDir, 'public')));
+    app.set('views',path.join('//',appDir, 'views'));
+}
+
+
+
+app.use(session({
+  secret: 'your-unique-and-hard-to-guess-secret-key',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false }
+}))
+
+function getcurip(str) {
+  let arr = str.split(':');
+  arr = arr[arr.length-1];
+  return arr;
+}
+
+app.use(async function (req, res, next) {
+  let page =  req._parsedOriginalUrl.pathname;
+
+  if (page=='/data' || page=='/kabstart' || page=='/upload' || page=='/addmat' || page=='/stream' || page=='/info') {
+      next();
+      return 1
+  }
+  if (req.session.userId==undefined) {
+      if (page!='/log') {
+          res.redirect("/log")
+      } else next();
+  } else {
+      if (page=='/log') {
+          res.redirect("/")
+      } else next();
+  }
+
+  mlog(page,req.session,getcurip(req.socket.remoteAddress),req.query)
+  
+})
+
+
+app.get('/', (req, res) => {
+  res.render('index', {
+    user: req.session.user,
+  });
+});
+
+app.get('/log', (req, res) => {
+  res.render('log', {
+    title: 'login',
+  })
+});
+
+app.get('/reg', (req, res) => {
+  res.render('reg', {
+    title: 'registration',
+  })
+});
+
+app.use(express.urlencoded({ extended: true }))
+
+app.post('/log', async (req, res) => {
+  const { email, password } = req.body;
+
+  const rows = await get_email(email);
+  if (rows.length > 0) {
+    const user = rows[0];
+
+    if (password == user.password) {
+      req.session.userId = user.id; 
+      req.session.user = user; 
+      res.redirect('/');
+    } else {
+      res.send('Неверный пароль');
+    }
+  } else {
+    res.send('Пользователь с таким email не найден');
+  }
+});
+
+app.post('/register', async (req, res) => {
+  const { email, username, password } = req.body;
+
+  const rows = await get_email( email);
+  if (rows.length > 0) {
+    res.send('Пользователь с таким email уже существует');
+  } else {
+    await insert_user( username, email, password);
+    res.redirect('/log');
+  }
+});
+
+
+
+app.get('/index-admin', (req, res) => {
+    if (req.session.user.admin) {
+      res.render('index-admin', {
+        title: 'Admin Panel',
+        user: req.session.user,
+      });
+    } else {
+      res.redirect('/log');
+    }
+  });
+
+
+
+app.get('/adminOrders', async (req, res) => {
+    if(req.session.user.admin) {
+      const orders = await get_incomplete_orders();
+  
+      res.render('adminOrders', { title: 'Admin Orders', user: req.session.user, orders });
+    } else {
+      res.redirect('/log');
+    }
+  });
+
+app.get('/searchOrder', async (req, res) => {
+    if(req.session.user.admin) {
+        const orderId = req.query.orderId;
+        const order = await get_order_by_id(orderId);
+  
+        res.render('adminOrders', { title: 'Search Order', user: req.session.user, order });
+    } else {
+        res.redirect('/log');
+    }
+});
+
+app.get('/searchOrderCompleted', async (req, res) => {
+    if(req.session.user.admin) {
+        const orderId = req.query.orderId;
+        const orderComplete = await get_orderComplete_by_id(orderId);
+  
+        res.render('adminOrdersCompleted', { title: 'Search Order', user: req.session.user, orderComplete });
+    } else {
+        res.redirect('/log');
+    }
+});
+
+app.get('/adminOrdersCompleted', async (req, res) => {
+    if(req.session.user.admin) {
+      const orders = await get_completed_orders(pool);
+  
+      res.render('adminOrdersCompleted', { title: 'Admin Orders', user: req.session.user, orders });
+    } else {
+      res.status(403).send('Доступ запрещен');
+    }
+});
+
+
+
+app.post('/orders/new', async (req, res) => {
+    if(req.session.user.admin) {
+      const orders = await get_orders_by_status(pool, 'На рассмотрении');
+  
+      res.render('adminOrders', { user: req.session.user, orders });
+    } else {
+      res.status(403).send('Доступ запрещен');
+    }
+});
+  
+app.post('/orders/processing', async (req, res) => {
+    if(req.session.user.admin) {
+      const orders = await get_orders_by_status(pool, 'Закупаем');
+  
+      res.render('adminOrders', { user: req.session.user, orders });
+    } else {
+      res.status(403).send('Доступ запрещен');
+    }
+});
+  
+app.post('/orders/completed', async (req, res) => {
+    if(req.session.user.admin) {
+      const orders = await get_orders_by_status(pool, 'Ждем');
+  
+      res.render('adminOrders', { user: req.session.user, orders });
+    } else {
+      res.status(403).send('Доступ запрещен');
+    }
+});
+  
+
+app.post('/orders/canceled', async (req, res) => {
+  if(req.session.user.admin) {
+    const orders = await get_orders_by_status(pool, 'Забрать');
+ 
+    res.render('adminOrders', {user: req.session.user, orders });
+  } else {
+    res.status(403).send('Доступ запрещен');
+  }
+});
+
+app.post('/orders/completed-order', async (req, res) => {
+  if(req.session.user.admin) {
+    const orders = await get_orders_by_status(pool, 'Завершено');
+    res.render('adminOrders', {user: req.session.user, orders: rows });
+  } else {
+    res.status(403).send('Доступ запрещен');
+  }
+});
+
+
+app.post('/updateOrderStatus', async (req, res) => {
+  if(req.session.user.admin) {
+    const { OrderID, newStatus } = req.body;
+
+    if (newStatus === 'Забрать') {
+      const StatusChangeDate = new Date(); // Получите текущую дату и время
+
+      await update_order_status_with_date(pool, newStatus, StatusChangeDate, OrderID);
+    } else {
+      await update_order_status(pool, newStatus, OrderID);
+    }
+
+    res.redirect('/adminOrders');
+  } else {
+    res.status(403).send('Доступ запрещен');
+  }
+});
+
+
+
+
+  app.get('/order-user', (req, res) => {
+    if(req.session.user) {
+      res.render('order-user', {
+        title: 'orders',
+        user: req.session.user,
+      });
+    } else {
+      res.redirect('/log'); 
+    }
+  });
+
+  Handlebars.registerHelper('isOverThreeDays', function(status, StatusChangeDate) {
+    console.log('Status:', status);
+    console.log('Status Change Date:', StatusChangeDate);
+  
+    if (status === 'Забрать') {
+      const changeDate = new Date(StatusChangeDate);
+      const now = new Date();
+      const differenceInDays = Math.ceil((now - changeDate) / (1000 * 60 * 60 * 24));
+  
+      console.log('Difference in Days:', differenceInDays);
+  
+      return differenceInDays > 3;
+    }
+    return false;
+  });
+  
+  
+  
+  
+
+  Handlebars.registerHelper('dateFormat', function(value) {
+        return moment(value).format('DD/MM');
+  });
+
+  Handlebars.registerHelper('OrderDateAndEndDate', function(value) {
+    return moment(value).format('DD/MM/YY');
+});
+
+  Handlebars.registerHelper('eq', function(a, b) {
+    return a === b;
+  });
+
+  app.get('/myOrder', async (req, res) => {
+    if (req.session.user) {
+      const userId = req.session.user.id;
+  
+      const orders = await get_user_orders(pool, userId);
+  
+      // Проверьте флаг успешного заказа
+      const orderSuccess = req.session.orderSuccess;
+      if (orderSuccess) {
+        // Очистите флаг, чтобы сообщение не показывалось в следующий раз
+        req.session.orderSuccess = false;
+        // Отобразите сообщение о успешном заказе
+        res.render('myOrder', { title: 'orders', user: req.session.user, orders, successMessage: 'Заказ успешно совершен!' });
+      } else {
+        // Отобразите страницу без сообщения
+        res.render('myOrder', { title: 'orders', user: req.session.user, orders });
+      }
+    } else {
+      res.redirect('/log');
+    }
+  });
+  
+
+  app.post('/completeOrder', async (req, res) => {
+    if(req.session.user) {
+      const orderId = req.body.orderId;
+      const endDate = new Date(); // Получите текущую дату и время
+    
+      await complete_order(pool, endDate, orderId);
+    
+      res.redirect('/myOrder');
+    } else {
+      res.redirect('/log');
+    }
+  });
+  
+
+  app.get('/order-history', async (req, res) => {
+    if(req.session.user) {
+      const userId = req.session.user.id;
+      
+      const orders = await get_order_history(userId);
+  
+      res.render('order-history', { title: 'orders', user: req.session.user, orders });
+      return orders;
+    } else {
+      res.redirect('/log');
+    }
+  });
+
+
+
+  app.post('/submit-order', async (req, res) => {
+    const order = req.body;
+    const userId = req.session.userId;
+    const author = req.session.user.username; // Используйте имя пользователя из сессии
+    const orderDate = new Date(); // Получите текущую дату и время
+  
+    if (userId) {
+      await submit_order(pool, order, userId, author, orderDate);
+      req.session.orderSuccess = true; // Установите флаг успешного заказа
+      res.redirect('/myOrder');
+    } else {
+      res.status(400).send('Ошибка: userId не определен');
+    }
+  });
+  
+  
+  
+  
+
+
+  app.get('/logout', (req, res) => {
+    req.session.destroy(err => {
+      if (err) {
+        return res.redirect('/');
+      }
+    
+      res.clearCookie('connect.sid'); 
+      res.redirect('/log');
+    });
+  });
+
+  app.get('/start', (req, res) => {
+    if(req.session.user) {
+      res.render('order-user', {
+        title: 'Order',
+        user: req.session.user,
+      });
+    } else {
+      res.redirect('/log'); 
+    }
+  });
+  
 
 
 app.listen(3000, async () => {

@@ -46,6 +46,17 @@ export async function get_incomplete_orders(){
     const [rows, fields] = await pool.query(qer);
     return rows;
 }
+export async function get_order_by_id(orderId){
+    const qer = 'SELECT * FROM Orders WHERE OrderID = ? AND Status != "Завершено"';
+    const [rows, fields] = await pool.query(qer, [orderId]);
+    return rows[0];
+}
+
+export async function get_orderComplete_by_id(orderId){
+    const qer = 'SELECT * FROM Orders WHERE OrderID = ? AND Status = "Завершено"';
+    const [rows, fields] = await pool.query(qer, [orderId]);
+    return rows[0];
+}
 export async function get_completed_orders(){
     const qer = 'SELECT * FROM Orders WHERE Status = ?';
     const [rows, fields] = await pool.query(qer, ['Завершено']);
@@ -66,7 +77,7 @@ export async function update_order_status_with_date(pool, newStatus, StatusChang
     await pool.query(qer, [newStatus, StatusChangeDate, OrderID]);
 }
 export async function get_user_orders(pool, userId){
-    const qer = 'SELECT * FROM Orders WHERE UserID = ? AND Status != "Завершено"';
+    const qer = 'SELECT *, Status = "Забрать" AS CanComplete FROM Orders WHERE UserID = ? AND Status != "Завершено"';
     const [rows, fields] = await pool.query(qer, [userId]);
     return rows;
 }

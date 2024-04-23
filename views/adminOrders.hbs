@@ -12,21 +12,67 @@
     justify-content: center;
 }
 
+
+
+
 </style>
 
-<div class="btn-group" role="group" aria-label="Basic outlined example" style="display: flex; justify-content: center;">
+<form action="/searchOrder" method="get" style="display: flex; flex-direction: row; justify-content: center; align-items: stretch; width: 50%; margin: auto; padding: 10px;">
+    <input type="text" id="orderId" name="orderId" required placeholder="Номер заказа" class="form-control" style="border: 4px solid #1ab188; border-radius: 3px 0 0 3px; border-right: none;">
+    <input type="submit" value="Поиск" style="color: white; background-color: #1ab188; border: 3px solid #1ab188; border-radius: 0 3px 3px 0; height: 53px">
+</form>
+
+
+
+
+
+   
+ <ul id="orderList" style="list-style-type: none; display: flex; justify-content: center; margin-top: 20px;">
+    {{#if order}}
+        <li class="orderItem" style="margin-bottom: 20px;  padding: 10px; border: 3px solid #1ab188; border-radius: 10px; flex: 0 0 calc(40% - 40px); {{#if (isOverThreeDays order.Status order.StatusChangeDate)}}background-color: #ffcccc;{{/if}}">
+          <p class="lead" style="border-bottom: 1px solid #ccc; padding: 4px;"><strong>Номер заказа:</strong> {{order.OrderID}}</p>
+          <p class="lead" style="border-bottom: 1px solid #ccc; padding: 4px;"><strong>Товар:</strong> {{order.ProductName}}</p>
+          <p class="lead" style="border-bottom: 1px solid #ccc; padding: 4px;"><strong>Количество:</strong> {{order.Quantity}}</p>
+          <p class="lead" style="border-bottom: 1px solid #ccc; padding: 4px;"><strong>URL:</strong> <a href="{{order.URL}}">{{this.URL}}</a></p>
+          <p class="lead" style="border-bottom: 1px solid #ccc; padding: 4px;"><strong>Желаемые сроки: </strong> {{dateFormat order.StartDate 'DD MM'}}</p>
+          <p class="lead" style="border-bottom: 1px solid #ccc; padding: 4px;"><strong>Дата совершения заказа: </strong> {{OrderDateAndEndDate order.OrderDate 'DD MM YY'}}</p>
+          <p class="lead" style="border-bottom: 1px solid #ccc; padding: 4px;"><strong>Автор:</strong> {{order.Author}}</p>
+          {{#unless (eq order.Status 'Завершено')}}
+              <form action="/updateOrderStatus" method="POST">
+                <input type="hidden" name="OrderID" value="{{order.OrderID}}">
+                <div class="input-group mb-3">
+                  <select name="newStatus" class="form-control" aria-label="Status" aria-describedby="basic-addon1">
+                    <option value="На рассмотрении" {{#if (eq order.Status 'На рассмотрении')}}selected{{/if}}>На рассмотрении</option>
+                    <option value="Закупаем" {{#if (eq order.Status 'Закупаем')}}selected{{/if}}>Закупаем</option>
+                    <option value="Ждем" {{#if (eq order.Status 'Ждем')}}selected{{/if}}>Ждем</option>
+                    <option value="Забрать" {{#if (eq order.Status 'Забрать')}}selected{{/if}}>Забрать</option>
+                  </select>
+                  <button type="submit" style="color: white; background-color: #1ab188; border: 3px solid #1ab188; border-radius: 3px;" >Обновить статус</button>
+                </div>
+              </form>
+          {{/unless}}
+        </li>
+    {{else}}
+      
+    
+  </ul>
+
+
+
+
+<div class="btn-group" role="group" aria-label="Basic outlined example" style="display: flex; justify-content: center; margin-bottom: 20px;">
     <form action="/orders/new" method="POST"><button class="btn btn-outline-primary" type="submit">На рассмотрении</button></form>
     <form action="/orders/processing" method="POST"><button class="btn btn-outline-primary" type="submit">Закупаем</button></form>
     <form action="/orders/completed" method="POST"><button class="btn btn-outline-primary" type="submit">Ждем</button></form>
     <form action="/orders/canceled" method="POST"><button class="btn btn-outline-primary" type="submit">Забрать</button></form>
 </div>
-
+  {{/if}}
 
 
   
   <ul id="orderList" style="list-style-type: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1em;">
     {{#each orders}}
-            <li style="margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 10px; {{#if (isOverThreeDays this.Status this.StatusChangeDate)}}background-color: #ffcccc;{{/if}}">        <div class="input-group mb-3">
+            <li style="margin-bottom: 20px; padding: 4px; border: 3px solid #1ab188; border-radius: 10px; {{#if (isOverThreeDays this.Status this.StatusChangeDate)}}background-color: #ffcccc;{{/if}}">        <div class="input-group mb-3">
           <input type="text" class="form-control" placeholder="Номер заказа: {{this.OrderID}}" aria-label="OrderID" aria-describedby="basic-addon1" readonly>
         </div>
         <div class="input-group mb-3">
@@ -62,7 +108,7 @@
                 <option value="Ждем" {{#if (eq this.Status 'Ждем')}}selected{{/if}}>Ждем</option>
                 <option value="Забрать" {{#if (eq this.Status 'Забрать')}}selected{{/if}}>Забрать</option>
               </select>
-              <button type="submit">Обновить статус</button>
+              <button type="submit" style="color: white; background-color: #1ab188; border: 3px solid #1ab188; border-radius: 3px;" >Обновить статус</button>
             </div>
           </form>
         {{/unless}}

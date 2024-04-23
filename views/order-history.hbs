@@ -1,19 +1,21 @@
+
 <div style="max-width: 100%; margin: auto; border: 1px solid #ccc; padding: 20px; margin-top: 50px; border-radius: 10px; font-family: Arial;">
   <h2 style="text-align: center;">История заказов</h2>
-  <ul id="orderList" style="list-style-type: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1em;">
+  <ul id="orderList" style="list-style-type: none; display: flex; flex-flow: row wrap; justify-content: space-between;">
     {{#if orders.length}}
       {{#each orders}}
-        <li style="margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; border-radius: 10px;">
-          <p class="lead" style="border-bottom: 1px solid #ccc; padding: 10px;"><strong>Номер заказа:</strong> {{this.OrderID}}</p>
-          <p class="lead" style="border-bottom: 1px solid #ccc; padding: 10px;"><strong>Товар:</strong> {{this.ProductName}}</p>
-          <p class="lead" style="border-bottom: 1px solid #ccc; padding: 10px;"><strong>Количество:</strong> {{this.Quantity}}</p>
-          <p class="lead" style="border-bottom: 1px solid #ccc; padding: 10px;"><strong>URL:</strong> <a href="{{this.URL}}">{{this.URL}}</a></p>
-          <p class="lead" style="border-bottom: 1px solid #ccc; padding: 10px;"><strong>Желаемые сроки: </strong> {{dateFormat this.StartDate 'DD MM'}}</p>
-          <p class="lead" style="border-bottom: 1px solid #ccc; padding: 10px;"><strong>Дата совершения заказа: </strong> {{OrderDateAndEndDate this.OrderDate 'DD MM YY'}}</p>
-          <p class="lead" style="border-bottom: 1px solid #ccc; padding: 10px;"><strong>Дата завершения заказа: </strong> {{OrderDateAndEndDate this.EndDate 'DD MM YY'}}</p>
-          <p class="lead" style="border-bottom: 1px solid #ccc; padding: 10px;"><strong>Автор:</strong> {{this.Author}}</p>
-          <p class="lead" style="border-bottom: 1px solid #ccc; padding: 10px;"><strong>Статус:</strong> {{this.Status}}</p>
+        <li class="orderItem" style="margin-bottom: 20px;  padding: 1px; border: 3px solid #1ab188; border-radius: 10px; flex: 0 0 calc(33% - 20px);">
+          <p class="lead" style="border-bottom: 1px solid #ccc; padding: 4px;"><strong>Номер заказа:</strong> {{this.OrderID}}</p>
+          <p class="lead" style="border-bottom: 1px solid #ccc; padding: 4px;"><strong>Товар:</strong> {{this.ProductName}}</p>
+          <p class="lead" style="border-bottom: 1px solid #ccc; padding: 4px;"><strong>Количество:</strong> {{this.Quantity}}</p>
+          <p class="lead" style="border-bottom: 1px solid #ccc; padding: 4px;"><strong>URL:</strong> <a href="{{this.URL}}">{{this.URL}}</a></p>
+          <p class="lead" style="border-bottom: 1px solid #ccc; padding: 4px;"><strong>Желаемые сроки: </strong> {{dateFormat this.StartDate 'DD MM'}}</p>
+          <p class="lead" style="border-bottom: 1px solid #ccc; padding: 4px;"><strong>Дата совершения заказа: </strong> {{OrderDateAndEndDate this.OrderDate 'DD MM YY'}}</p>
+          <p class="lead" style="border-bottom: 1px solid #ccc; padding: 4px;"><strong>Дата завершения заказа: </strong> {{OrderDateAndEndDate this.EndDate 'DD MM YY'}}</p>
+          <p class="lead" style="border-bottom: 1px solid #ccc; padding: 4px;"><strong>Автор:</strong> {{this.Author}}</p>
+          <p class="lead" style="border-bottom: 1px solid #ccc; padding: 4px;"><strong>Статус:</strong> {{this.Status}}</p>
         </li>
+        
       {{/each}}
     {{else}}
       <h3 style="text-align: center;">У вас пока нет завершенных заказов</h3>
